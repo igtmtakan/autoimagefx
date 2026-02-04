@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            padding: 15px;
+            background-color: #f8f9fa;
+            color: #333;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+            width: 100%;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            opacity: 0.9;
+        }
+
+        #startBtn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #stopBtn {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .status-box {
+            width: 100%;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            margin-top: auto;
+            /* Push to bottom */
+        }
+
+        .metric {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .metric span {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        #status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 5px;
+            word-wrap: break-word;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>ImageFX Auto</h2>
+
+    <div class="control-group">
+        <label for="targetCount">生成回数 (Count):</label>
+        <input type="number" id="targetCount" value="100" min="1">
+    </div>
+
+    <button id="startBtn">開始 (Start)</button>
+    <button id="stopBtn" disabled>停止 (Stop)</button>
+
+    <div class="status-box">
+        <div class="metric">完了: <span id="count">0</span> / <span id="total">100</span></div>
+        <div id="status">待機中 (Ready)</div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const countSpan = document.getElementById('count');
+        const totalSpan = document.getElementById('total');
+        const statusDiv = document.getElementById('status');
+        const targetInput = document.getElementById('targetCount');
+        // promptInput removed
+
+        let count = 0;
+
+        startBtn.addEventListener('click', () => {
+            const target = parseInt(targetInput.value, 10) || 100;
+            // prompt removed
+
+            totalSpan.textContent = target;
+            count = 0;
+            countSpan.textContent = 0;
+
+            window.electronAPI.startAutomation(target, null); // Pass null for prompt
+
+            statusDiv.textContent = '初期化中...';
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            targetInput.disabled = true;
+        });
+
+        stopBtn.addEventListener('click', () => {
+            window.electronAPI.stopAutomation();
+            statusDiv.textContent = '中断しました';
+            finishState();
+        });
+
+        window.electronAPI.onUpdateStatus((event, message) => {
+            statusDiv.textContent = message;
+        });
+
+        window.electronAPI.onUpdateCount((event, newCount) => {
+            count = newCount;
+            countSpan.textContent = count;
+        });
+
+        window.electronAPI.onAutomationFinished((event) => {
+            statusDiv.textContent = '完了しました';
+            finishState();
+        });
+
+        function finishState() {
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            targetInput.disabled = false;
+        }
+    </script>
+</body>
+
+</html>
