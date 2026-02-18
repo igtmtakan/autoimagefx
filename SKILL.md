@@ -1,0 +1,45 @@
+# Skill: Public Domain Quote T-Shirt Design Generation
+
+This skill involves generating vector-style typography designs based on public domain quotes, suitable for T-shirt printing, using ImageFX.
+
+## Prompt Strategy
+The key is to request "Vector typography design" and explicitly exclude the T-shirt object to get a clean, isolated design.
+
+**Template:**
+`Vector typography design featuring the quote "${quote}" and the author name "${author}", isolated on black background, no t-shirt, 2d vector art, clean lines, professional graphic design, poster style, high contrast, colorful`
+
+## Public Domain Quotes (Verified)
+The following quotes are from authors whose works are in the public domain (died over 70 years ago).
+
+"English Quote","Author"
+"The only way to have a friend is to be one.","Ralph Waldo Emerson"
+"To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.","Ralph Waldo Emerson"
+"Life is not a matter of holding good cards, but of playing a poor hand well.","Robert Louis Stevenson"
+"That which does not kill us makes us stronger.","Friedrich Nietzsche"
+"Be the change that you wish to see in the world.","Mahatma Gandhi"
+"In three words I can sum up everything I've learned about life: it goes on.","Robert Frost"
+"If you tell the truth, you don't have to remember anything.","Mark Twain"
+"A friend is someone who knows all about you and still loves you.","Elbert Hubbard"
+"To live is the rarest thing in the world. Most people exist, that is all.","Oscar Wilde"
+"I am not afraid of storms, for I am learning how to sail my ship.","Louisa May Alcott"
+"It is never too late to be what you might have been.","George Eliot"
+"Everything you can imagine is real.","Pablo Picasso"
+"Do what you can, with what you have, where you are.","Theodore Roosevelt"
+"Trust yourself. You know more than you think you do.","Benjamin Spock"
+"No one can make you feel inferior without your consent.","Eleanor Roosevelt"
+"The future belongs to those who believe in the beauty of their dreams.","Eleanor Roosevelt"
+"It does not matter how slowly you go as long as you do not stop.","Confucius"
+"Our greatest glory is not in never falling, but in rising every time we fall.","Confucius"
+"Study the past if you would define the future.","Confucius"
+"Success is not final, failure is not fatal: it is the courage to continue that counts.","Winston Churchill"
+"We make a living by what we get, but we make a life by what we give.","Winston Churchill"
+"The pessimist sees difficulty in every opportunity. The optimist sees opportunity in every difficulty.","Winston Churchill"
+"Happiness depends upon ourselves.","Aristotle"
+"We are what we repeatedly do. Excellence, then, is not an act, but a habit.","Aristotle"
+"To love is to suffer. To avoid suffering one must not love. But then one suffers from not loving.","Woody Allen"
+"The journey of a thousand miles begins with one step.","Lao Tzu"
+"Nature does not hurry, yet everything is accomplished.","Lao Tzu"
+"Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.","Lao Tzu"
+"Simplicity is the ultimate sophistication.","Leonardo da Vinci"
+"Learning never exhausts the mind.","Leonardo da Vinci"
+"Art is never finished, only abandoned.","Leonardo da Vinci"
